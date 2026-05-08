@@ -20,10 +20,10 @@ public class DeviceController {
     private AtomicLong idCounter = new AtomicLong(1);
 
     public DeviceController() {
-        deviceList.add(new Device(idCounter.getAndIncrement(), "điện thoại Samsung", "samsung", 5000F, "URL hình ảnh"));
-        deviceList.add(new Device(idCounter.getAndIncrement(), "điện thoại Oppo", "oppo", 5000F, "URL hình ảnh"));
-        deviceList.add(new Device(idCounter.getAndIncrement(), "điện thoại Redmi", "redmi", 5000F, "URL hình ảnh"));
-        deviceList.add(new Device(idCounter.getAndIncrement(), "điện thoại Sony", "sony", 5000F, "URL hình ảnh"));
+        deviceList.add(new Device(idCounter.getAndIncrement(),"điện thoại Samsung","samsung",5000F, "URL hình ảnh"));
+        deviceList.add(new Device(idCounter.getAndIncrement(),"điện thoại Oppo","oppo", 5000F,"URL hình ảnh"));
+        deviceList.add(new Device(idCounter.getAndIncrement(),"điện thoại Redmi","redmi", 5000F, "URL hình ảnh"));
+        deviceList.add(new Device(idCounter.getAndIncrement(),"điện thoại Sony", "sony", 5000F,"URL hình ảnh"));
     }
 
     @GetMapping("/deviceList")
