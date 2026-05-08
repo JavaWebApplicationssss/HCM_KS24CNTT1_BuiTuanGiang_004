@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Device List</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h1 style="background-color: coral">Header</h1>
+        </div>
+        <div th:if="${message}" style="color: green;">
+            <p th:text="${message}"></p>
+        </div>
+        <div>
+            <div>
+                <form th:action="@{/deviceList}" method="get">
+                    <input type="text" name="search" th:value="${search}" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </form>
+                <div>
+                    <a th:href="@{/add}" style="background-color: darkorange; color: white; padding: 5px; text-decoration: none;">Add</a>
+                </div>
+            </div>
+            <table style="border: 1px solid black; border-collapse: collapse;" th:if="${#lists.size(list) > 0}">
+                <tr>
+                    <th style="border: 1px solid black; padding: 5px;">STT</th>
+                    <th style="border: 1px solid black; padding: 5px;">DeviceName</th>
+                    <th style="border: 1px solid black; padding: 5px;">Brand</th>
+                    <th style="border: 1px solid black; padding: 5px;">Price</th>
+                    <th style="border: 1px solid black; padding: 5px;">DeviceImage</th>
+                    <th style="border: 1px solid black; padding: 5px;">Hành động</th>
+                </tr>
+                <tr th:each="device, iterStat : ${list}">
+                    <td style="border: 1px solid black; padding: 5px;" th:text="${iterStat.index + 1}"></td>
+                    <td style="border: 1px solid black; padding: 5px;" th:text="${device.deviceName}"></td>
+                    <td style="border: 1px solid black; padding: 5px;" th:text="${device.brand}"></td>
+                    <td style="border: 1px solid black; padding: 5px;" th:text="${device.price}"></td>
+                    <td style="border: 1px solid black; padding: 5px;">
+                        <img th:src="${device.url}" alt="Device Image" width="50" th:if="${device.url != null and !device.url.isEmpty()}">
+                        <span th:if="${device.url == null or device.url.isEmpty()}">No Image</span>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px;">
+                        <a th:href="@{/edit/{id}(id=${device.id})}" style="margin-right: 10px;">Sửa</a>
+                        <form th:action="@{/delete/{id}(id=${device.id})}" method="post" style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa thiết bị này?');">
+                            <button type="submit">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+            <div th:if="${#lists.size(list) == 0}">
+                <p>Chưa có thiết bị nào trong kho</p>
+            </div>
+        </div>
+        <div>
+            <h1 style="background-color: cornflowerblue">Footer</h1>
+        </div>
+    </div>
+</body>
+</html>
